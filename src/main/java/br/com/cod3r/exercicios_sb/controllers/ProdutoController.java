@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,11 +23,13 @@ public class ProdutoController {
 	@Autowired // Aqui o Spring é o responsável por criar um produtoRepository
 	private ProdutoRepository produtoRepository;
 
-	@PostMapping //Se for fazer um POST vem para esse
+//	@PostMapping //Se for criar um produto usa-se o POST
 	/*
 	 * Este método será chamado sempre que fizer uma requisição
 	 * do tipo POST.
 	 */
+	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT}) 
+	// o "method" serve para fazer tipo uma lista de métodos
 	public @ResponseBody Produto novoProduto(@Valid Produto produto) {
 		produtoRepository.save(produto); //Agora ele persistirá no MySQL
 		return produto;
@@ -46,9 +49,9 @@ public class ProdutoController {
 	   * está dentro do "path" do GetMapping
 	   */
 	
-	@PutMapping //Se for fazer um PUT vem para esse
-	public Produto alterarProduto(@Valid Produto produto) {
-		produtoRepository.save(produto);
-		return produto;
-	} // Para alterar o objeto inteiro usa-se a requisição do tipo PUT
+//	@PutMapping //Se for fazer um PUT vem para esse
+//	public Produto alterarProduto(@Valid Produto produto) {
+//		produtoRepository.save(produto);
+//		return produto;
+//	} // Para alterar o objeto inteiro usa-se a requisição do tipo PUT
 }
