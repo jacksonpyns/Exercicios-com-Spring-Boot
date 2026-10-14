@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cod3r.exercicios_sb.models.Cliente;
+import br.com.cod3r.exercicios_sb.model.entities.Cliente;
 
 @RestController
 @RequestMapping(path = "/clientes") // Nao vai precisar colocar o /clientes no GetMapping,
