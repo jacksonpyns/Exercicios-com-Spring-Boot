@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cod3r.exercicios_sb.model.entities.Produto;
 import br.com.cod3r.exercicios_sb.model.repositories.ProdutoRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -21,8 +22,8 @@ public class ProdutoController {
 	 * Este método será chamado sempre que fizer uma requisição
 	 * do tipo POST.
 	 */
-	public @ResponseBody Produto novoProduto(Produto produto) {
+	public @ResponseBody Produto novoProduto(@Valid Produto produto) {
 		produtoRepository.save(produto); //Agora ele persistirá no MySQL
 		return produto;
-	}
+	} // O @Valid é para as validações colocadas na classe Produto sejam aplicadas
 }
