@@ -3,10 +3,11 @@ package br.com.cod3r.exercicios_sb.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,9 +50,22 @@ public class ProdutoController {
 	   * está dentro do "path" do GetMapping
 	   */
 	
+	@GetMapping(path = "/pagina/{numeroPagina}/{qtdePagina}")
+	public Iterable<Produto> obterProdutosPorPagina(
+			@PathVariable int numeroPagina, @PathVariable int qtdePagina) {
+		if(qtdePagina >= 5) qtdePagina = 5;
+		Pageable page = PageRequest.of(numeroPagina, qtdePagina); // Numerando as paginas com os elementos
+		return produtoRepository.findAll(page);
+	}
+	
 //	@PutMapping //Se for fazer um PUT vem para esse
 //	public Produto alterarProduto(@Valid Produto produto) {
 //		produtoRepository.save(produto);
 //		return produto;
 //	} // Para alterar o objeto inteiro usa-se a requisição do tipo PUT
+	
+	@DeleteMapping(path = "/{id}") //Para deletar pelo Id
+	public void excluirProduto(@PathVariable int id) {
+		produtoRepository.deleteById(id);
+	}
 }
