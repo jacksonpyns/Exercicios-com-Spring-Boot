@@ -41,6 +41,13 @@ public class ProdutoController {
 		return produtoRepository.findAll();
 	} // Vai retornar todos os produtos da tabela para o banco de dados
 	
+	@GetMapping(path="/nome/{parteNome}")
+	public Iterable<Produto> obterProdutosPorNome(
+			@PathVariable String parteNome) {
+//		return produtoRepository.findByNomeContainingIgnoreCase(parteNome);
+		return produtoRepository.searchByNameLike(parteNome);
+	}
+	
 	@GetMapping(path="/{id}") //Consegue pegar o produto pelo ID
 	// ex: http://localhost/8080/api/produtos/1
 	public Optional<Produto> obterProdutoPorId(@PathVariable int id) {
