@@ -1,4 +1,4 @@
-# 🍃 Usando Spring Boot
+# 🍃 Exercitando com Spring Boot
 
 Repositório dedicado aos meus estudos práticos com **Spring Boot**, aplicando conceitos do ecossistema Java no desenvolvimento de aplicações.
 
